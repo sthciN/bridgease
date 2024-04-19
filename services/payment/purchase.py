@@ -3,15 +3,15 @@ from flask import Blueprint, request
 from models.models import UserProfile
 from .stripe_api import assign_credit, stripe_purchase
 from .plans import get_plan_ids
+import flask_praetorian
 import stripe
 import os
 
-credit_blueprint = Blueprint('credit_blueprint', __name__)
-
+payment_blueprint = Blueprint('payment_blueprint', __name__)
 
 @app.route('/user/<int:id>/buy_plan', methods=['POST'])
 def buy_plan(id):
-    user = UserProfile.query.get(id)
+    user = UserProfile.query.get(users_id=id)
     if not user:
         return "User not found", 404
 
@@ -35,8 +35,9 @@ def buy_plan(id):
     return result
 
 @app.route('/user/<int:id>/add_credits', methods=['POST'])
+@flask_praetorian.auth_required
 def add_credits(id):
-    user = UserProfile.query.get(id)
+    user = UserProfile.query.get(users_id=id)
     if not user:
         return "User not found", 404
 
