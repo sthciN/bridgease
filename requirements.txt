@@ -1,0 +1,8 @@
+Flask-SQLAlchemy==3.1.1
+Flask==3.0.3
+psycopg2-binary==2.9.9
+python-dotenv==1.0.1
+Flask-Migrate==4.0.7
+stripe==9.3.0
+flask_praetorian==1.6.0
+flask_Cors==4.0.0
