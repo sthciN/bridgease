@@ -43,7 +43,7 @@ def login():
     
     return jsonify(ret), 200
 
-@app.route('/update_password', methods=['POST'])
+@app.route('/update_password', methods=['PUT'])
 @flask_preatection.auth_required
 def update_password():
     user_id = request.json.get('user_id')
@@ -62,7 +62,7 @@ def update_password():
 
     return jsonify({"message": "Password updated successfully"}), 200
 
-@app.route('/update_user_profile', methods=['POST'])
+@app.route('/update_user_profile', methods=['PUT'])
 @flask_preatection.auth_required
 def update_user_profile():
     user_id = request.json.get('user_id')
@@ -86,7 +86,7 @@ def update_user_profile():
 
     return jsonify({"message": "Password updated successfully"}), 200
 
-@app.route('/update_client', methods=['POST'])
+@app.route('/update_client', methods=['PUT'])
 @flask_preatection.auth_required
 def update_client():
     user_id = request.json.get('user_id')
