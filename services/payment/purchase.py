@@ -6,6 +6,7 @@ from .plans import get_plan_ids
 import flask_praetorian
 import stripe
 import os
+from utils.locale.error_message import get_error_message
 
 payment_blueprint = Blueprint('payment_blueprint', __name__)
 
@@ -13,20 +14,20 @@ payment_blueprint = Blueprint('payment_blueprint', __name__)
 def buy_plan(id):
     user = UserProfile.query.get(users_id=id)
     if not user:
-        return "User not found", 404
+        return get_error_message(language='en', error_type='user_not_found'), 404
 
     data = request.get_json()
     if not data or 'credits' not in data:
-        return "Invalid request", 400
+        return get_error_message(language=user.language, error_type='invalid_request'), 400
     
     try:
         if plan_id not in get_plan_ids():
-            return "Invalid plan id", 400
+            return get_error_message(language=user.language, error_type='invalid_plan_id'), 400
         
         plan_id = int(data['plan_id'])
     
     except ValueError:
-        return "Invalid plan id", 400
+        return get_error_message(language=user.language, error_type='invalid_plan_id'), 400
 
 
     # Create a charge: this will charge the user's card
@@ -39,18 +40,18 @@ def buy_plan(id):
 def add_credits(id):
     user = UserProfile.query.get(users_id=id)
     if not user:
-        return "User not found", 404
+        return get_error_message(language='en', error_type='user_not_found'), 404
 
     data = request.get_json()
     if not data or 'credits' not in data:
-        return "Invalid request", 400
+        return get_error_message(language=user.language, error_type='invalid_request'), 400
     try:
         credits_to_add = int(data['credits'])
     except ValueError:
-        return "Invalid number of credits", 400
+        return get_error_message(language=user.language, error_type='invalid_number_of_credits'), 400
 
     if 10 < credits_to_add < 1:
-        return "Number of credits must be between 1 to 10", 400
+        return get_error_message(language=user.language, error_type='number_of_credits_must_be_between_1_to_10'), 400
 
     # Create a charge: this will charge the user's card
     result = stripe_purchase(user, credits=credits_to_add)
@@ -71,10 +72,10 @@ def stripe_webhook():
             payload, sig_header, endpoint_secret
         )
     except ValueError as e:
-        return 'Invalid payload', 400
+        return get_error_message(language='en', error_type='invalid_payload'), 400
     
     except stripe.error.SignatureVerificationError as e:
-        return 'Invalid signature', 400
+        return get_error_message(language='en', error_type='invalid_signature'), 400
 
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':

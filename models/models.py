@@ -106,6 +106,7 @@ class UserProfile(db.Model):
     born_date = Column(Date)
     phone = Column(String(100))
     credits = db.Column(db.Integer, default=0)
+    language = db.Column(db.Text)
     
     users = relationship(Users, foreign_keys=[users_id])
 

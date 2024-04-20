@@ -3,7 +3,8 @@ from db.database import db
 from models.models import Users, Client, UserProfile
 from flask import request, jsonify, Blueprint
 from services.auth.guard_app import guard
-import flask_preatection
+import flask_praetorian
+from utils.locale.error_message import get_error_message
 
 user_blueprint = Blueprint('user_blueprint', __name__)
 
@@ -44,7 +45,7 @@ def login():
     return jsonify(ret), 200
 
 @app.route('/update_password', methods=['PUT'])
-@flask_preatection.auth_required
+@flask_praetorian.auth_required
 def update_password():
     user_id = request.json.get('user_id')
     new_password = request.json.get('new_password')
@@ -52,7 +53,7 @@ def update_password():
     # Find the user
     user = Users.query.get(user_id)
     if not user:
-        return jsonify({"error": "User not found"}), 404
+        return jsonify({"error": get_error_message(language='en', error_type='user_not_found')}), 404
 
     # Update the password
     user.hashed_password = guard.hash_password(new_password)
@@ -63,7 +64,7 @@ def update_password():
     return jsonify({"message": "Password updated successfully"}), 200
 
 @app.route('/update_user_profile', methods=['PUT'])
-@flask_preatection.auth_required
+@flask_praetorian.auth_required
 def update_user_profile():
     user_id = request.json.get('user_id')
     first_name = request.json.get('first_name')
@@ -74,7 +75,7 @@ def update_user_profile():
     # Find the user
     user = UserProfile.query.get(users_id=user_id)
     if not user:
-        return jsonify({"error": "User not found"}), 404
+        return jsonify({"error": get_error_message(language='en', error_type='user_not_found')}), 404
 
     # Update the password
     user.first_name = first_name
@@ -87,7 +88,7 @@ def update_user_profile():
     return jsonify({"message": "Password updated successfully"}), 200
 
 @app.route('/update_client', methods=['PUT'])
-@flask_preatection.auth_required
+@flask_praetorian.auth_required
 def update_client():
     user_id = request.json.get('user_id')
     preferred_climate_type = request.json.get('preferred_climate_type')
@@ -112,7 +113,7 @@ def update_client():
     # Find the user
     user = Client.query.get(users_id=user_id)
     if not user:
-        return jsonify({"error": "User not found"}), 404
+        return jsonify({"error": get_error_message(language='en', error_type='user_not_found')}), 404
 
     # Update the password
     user.preferred_climate_type = preferred_climate_type

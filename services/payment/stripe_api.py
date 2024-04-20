@@ -2,7 +2,7 @@ from db.database import db
 import stripe
 import os
 from flask import redirect
-from .plans import get_plan_amount, get_credit_amount, get_plan_by_id
+from .plans import get_plan_amount, get_credit_amount, get_plan_by_id_lang
 
 def assign_credit(user, credits_to_add):
     user.credits += credits_to_add
@@ -29,7 +29,7 @@ def stripe_purchase(user, **kwargs):
                 'price_data': {
                     'currency': 'usd',
                     'product_data': {
-                        'name': f'{get_plan_by_id(plan_id)} plan',
+                        'name': get_plan_by_id_lang(plan_id, language=user.language),
                     },
                     'unit_amount': amount,
                 },
