@@ -1,27 +1,22 @@
-from old.app import app
-from flask import Response, json
-from utils.constants import FAILED_DATA, NOT_FOUND_DATA
+from app import app
+from flask import jsonify
+from db.database import db
 
 class NotFoundData(Exception):
     pass
 
+class NotEnoughCredit(Exception):
+    pass
 
-@app.errorhandler(Exception)
-def handle_exception(e):
-    response = Response()
-    response.data = json.dumps(FAILED_DATA)
-    response.content_type = "application/json"
-    response.status_code = 500
-    print(e)
-    
-    return response
+class InvalidBodyRequest(Exception):
+    pass
 
 
-@app.errorhandler(NotFoundData)
-def handle_exception(e):
-    response = Response()
-    response.data = json.dumps(NOT_FOUND_DATA)
-    response.content_type = "application/json"
-    response.status_code = 404
-    
-    return response
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     return jsonify({"error": "Resource not found"}), 404
+
+# @app.errorhandler(500)
+# def internal_error(error):
+#     db.session.rollback()  # Rollback the session in case of database errors
+#     return jsonify({"error": "Internal server error"}), 500

@@ -5,6 +5,7 @@ def get_error_message(language="en", error_type="failed", **kwargs):
             "en": {
                 "failed": "Request failed",
                 "invalid_request": "Invalid request",
+                "invalid_body_request": "Missing or invalid field in JSON body",
                 "invalid_plan_id": "Invalid plan id",
                 "invalid_number_of_credits": "Invalid number of credits",
                 "user_number_of_credits": f"You have {kwargs['no_of_credits']} credit(s) left",
@@ -20,6 +21,7 @@ def get_error_message(language="en", error_type="failed", **kwargs):
             "tr": {
                 "failed": "İstek başarısız",
                 "invalid_request": "Geçersiz istek",
+                "invalid_body_request": "JSON verisinde eksik veya geçersiz alan",
                 "invalid_plan_id": "Geçersiz plan id",
                 "invalid_number_of_credits": "Geçersiz kredi sayısı",
                 "user_number_of_credits": f"Kalan {kwargs['no_of_credits']} krediniz var",
@@ -35,6 +37,7 @@ def get_error_message(language="en", error_type="failed", **kwargs):
             "fa": {
                 "failed": "درخواست ناموفق",
                 "invalid_request": "درخواست نامعتبر",
+                "invalid_body_request": "فیلد از بدنه جیسون گم شده یا نامعتبر است",
                 "invalid_plan_id": "شناسه طرح نامعتبر است",
                 "invalid_number_of_credits": "تعداد اعتبار نامعتبر است",
                 "user_number_of_credits": f"شما {kwargs['no_of_credits']} اعتبار دارید",

@@ -1,6 +1,10 @@
 from utils.locale.plan_message import get_plan_message
 
 def get_plan_amount(plan_id):
+    """
+    Get the amount in cents for the plan id
+    """
+
     if plan_id == 1:
         amount = 50000  # amount in cents
     elif plan_id == 2:
@@ -13,11 +17,18 @@ def get_plan_amount(plan_id):
     return amount
 
 def get_credit_amount(number_of_credits):
+    """
+    Get the amount in cents for the number of credits
+    """
     amount = number_of_credits * 1000
 
     return amount
 
 def get_plan_by_id_lang(plan_id, language):
+    """
+    Get plan by id and language
+    Returns the plan message in the specified language
+    """
     try:
         if plan_id == 1:
             return get_plan_message(language=language, get_plan_message="unlimited")

@@ -1,8 +1,9 @@
 from app import app
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from models.models import UserProfile
 from .stripe_api import assign_credit, stripe_purchase
 from .plans import get_plan_ids
+from utils.handler import NotFoundData, InvalidBodyRequest
 import flask_praetorian
 import stripe
 import os
@@ -12,51 +13,72 @@ payment_blueprint = Blueprint('payment_blueprint', __name__)
 
 @app.route('/user/<int:id>/buy_plan', methods=['POST'])
 def buy_plan(id):
-    user = UserProfile.query.get(users_id=id)
-    if not user:
-        return get_error_message(language='en', error_type='user_not_found'), 404
-
-    data = request.get_json()
-    if not data or 'credits' not in data:
-        return get_error_message(language=user.language, error_type='invalid_request'), 400
-    
+    """
+    Buy a plan by parsing a POST request containing the plan_id and user_id
+    """
     try:
-        if plan_id not in get_plan_ids():
-            return get_error_message(language=user.language, error_type='invalid_plan_id'), 400
+        user = UserProfile.query.get(users_id=id)
+        if not user:
+            raise NotFoundData(get_error_message(language='en', error_type='user_not_found'))
+
+        plan_id = request.josn.get('plan_id')
+        if not plan_id or plan_id not in get_plan_ids():
+            raise InvalidBodyRequest(get_error_message(language=user.language, error_type='invalid_request'))
         
-        plan_id = int(data['plan_id'])
+        plan_id = int(plan_id)
+
+        # Create a charge: this will charge the user's card
+        result = stripe_purchase(user, plan_id=plan_id)
+
+        return result
     
-    except ValueError:
-        return get_error_message(language=user.language, error_type='invalid_plan_id'), 400
+    except NotFoundData as e:
+        return jsonify({"error": str(e)}), 404
+    
+    except InvalidBodyRequest as e:
+        return jsonify({"error": str(e)}), 400
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-
-    # Create a charge: this will charge the user's card
-    result = stripe_purchase(user, plan_id=plan_id)
-
-    return result
 
 @app.route('/user/<int:id>/add_credits', methods=['POST'])
 @flask_praetorian.auth_required
 def add_credits(id):
-    user = UserProfile.query.get(users_id=id)
-    if not user:
-        return get_error_message(language='en', error_type='user_not_found'), 404
-
-    data = request.get_json()
-    if not data or 'credits' not in data:
-        return get_error_message(language=user.language, error_type='invalid_request'), 400
+    """
+    Add credits to a user account by parsing a POST request containing the number of credits to add
+    """
     try:
-        credits_to_add = int(data['credits'])
-    except ValueError:
-        return get_error_message(language=user.language, error_type='invalid_number_of_credits'), 400
+        user = UserProfile.query.get(users_id=id)
+        if not user:
+            raise NotFoundData(get_error_message(language='en', error_type='user_not_found'))
 
-    if 10 < credits_to_add < 1:
-        return get_error_message(language=user.language, error_type='number_of_credits_must_be_between_1_to_10'), 400
+        credits = request.json.get('credits')
+        if not credits:
+            raise InvalidBodyRequest(get_error_message(language=user.language, error_type='invalid_request'))
+        
+        try:
+            credits_to_add = int(credits)
+        
+        except ValueError:
+            raise InvalidBodyRequest(get_error_message(language=user.language, error_type='invalid_number_of_credits'))
 
-    # Create a charge: this will charge the user's card
-    result = stripe_purchase(user, credits=credits_to_add)
+        if 10 < credits_to_add < 1:
+            raise InvalidBodyRequest(get_error_message(language=user.language, error_type='number_of_credits_must_be_between_1_to_10'))
 
-    return result
+        # Create a charge: this will charge the user's card
+        result = stripe_purchase(user, credits=credits_to_add)
+
+        return result
+    
+    except NotFoundData as e:
+        return jsonify({"error": str(e)}), 404
+    
+    except InvalidBodyRequest as e:
+        return jsonify({"error": str(e)}), 400
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/webhook', methods=['POST'])
 def stripe_webhook():
