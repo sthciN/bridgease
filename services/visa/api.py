@@ -6,7 +6,7 @@ from .gpt import query_gpt
 from .assistant import query_assistant
 import flask_praetorian
 from utils.handler import NotFoundData, NotEnoughCredit
-from utils.locale.error_message import get_error_message
+from utils.locale.http_message import get_http_message
 
 visa_blueprint = Blueprint('visa_blueprint', __name__)
 
@@ -16,10 +16,10 @@ def get_visacard(id):
     try:
         user = UserProfile.query.get(id)
         if not user:
-            raise NotFoundData(get_error_message(language='en', error_type='user_not_found'))
+            raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
         
         if user.credits < 1:
-            raise NotEnoughCredit(get_error_message(language=user.language, error_type='not_enough_credits'))
+            raise NotEnoughCredit(get_http_message(language=user.language, http_type='not_enough_credits'))
         
         result = query_gpt()
 
@@ -44,9 +44,9 @@ def get_visacard_by_assistant(id):
     try:
         user = UserProfile.query.get(id)
         if not user:
-            raise NotFoundData(get_error_message(language='en', error_type='user_not_found'))
+            raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
         if user.credits < 1:
-            raise NotEnoughCredit(get_error_message(language=user.language, error_type='not_enough_credits'))
+            raise NotEnoughCredit(get_http_message(language=user.language, http_type='not_enough_credits'))
         
         result = query_assistant()
 

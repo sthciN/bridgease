@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ARRAY, Float, ForeignKey, Date
+from sqlalchemy import Column, Integer, String, Boolean, JSON, Float, ForeignKey, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from db.database import db
@@ -9,12 +9,21 @@ class IndustryType(db.Model):
     __tablename__ = "industry_type"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
+    title = Column(String(100), nullable=False)
+
+class CurrencyType(db.Model):
+    __tablename__ = "currency_type"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
 class ClimateType(db.Model):
     __tablename__ = "climate_type"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
 class Destination(db.Model):
@@ -22,25 +31,25 @@ class Destination(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
-    country = Column(Integer, nullable=False)
+    country = Column(String(100), nullable=False)
     state = Column(String(100))
     currency = Column(Integer)
-    dominant_language = Column(ARRAY(String(100)))
+    dominant_language = Column(JSON)
     predominant_religion = Column(String(200))
     cultural_objective = Column(String(1000))
     tolerance_level = Column(String(100))
-    in_demand_occupations = Column(ARRAY(String(100)))
+    in_demand_occupations = Column(JSON)
     labor_law = Column(String(1000))
     business_startup_requirement = Column(String(1000))
     has_tax_incentive = Column(Boolean)
     taxation = Column(String)
-    living_cost = Column(ARRAY(Float))
-    housing_cost_range = Column(ARRAY(Float))
+    living_cost = Column(JSON)
+    housing_cost_range = Column(JSON)
     transportation_cost = Column(Float)
     affordability = Column(String(100))
     inflation_rate = Column(Float)
-    climate_type_id = Column(Integer, ForeignKey('climate_type.id'))
-    land_use_types = Column(ARRAY(String(100)))
+    climate_type = Column(String(100))
+    land_use_types = Column(JSON)
     political_system = Column(String(100))
     healthcare_quality_ranking = Column(Integer)
     healthcare_quality = Column(String(1000))
@@ -52,12 +61,11 @@ class Destination(db.Model):
     timezone = Column(String(20))
     currency_exchange_rate = Column(Float)
 
-    climate_type = relationship(ClimateType, foreign_keys=[climate_type_id])
-
 class LanguageType(db.Model):
     __tablename__ = "language_type"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
 class Users(db.Model):
@@ -101,8 +109,8 @@ class UserProfile(db.Model):
     
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    first_name = Column(String(100), nullable=False)
-    last_name = Column(String(250), nullable=False)
+    first_name = Column(String(100))
+    last_name = Column(String(250))
     born_date = Column(Date)
     phone = Column(String(100))
     credits = db.Column(db.Integer, default=0)
@@ -116,27 +124,25 @@ class Client(db.Model):
 
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    preferred_climate_type = Column(ARRAY(String(100)))
-    preferred_language = Column(ARRAY(String(100)))
-    current_country_of_residence = Column(Integer)
-    citizenship_country = Column(Integer, nullable=False)
+    preferred_climate_type = Column(JSON)
+    preferred_language = Column(JSON)
+    current_country_of_residence = Column(String(100))
+    citizenship_country = Column(String(100), nullable=False)
     education_type = Column(String(100))
     education_level = Column(String(250))
-    preferred_living_cost_range = Column(ARRAY(Float))
+    preferred_living_cost_range = Column(String(100))
     years_of_work_experience = Column(Integer)
-    work_industry_id = Column(Integer, ForeignKey('industry_type.id'))
-    investment_capital_available_range = Column(ARRAY(Float))
+    work_industry = Column(String(100))
+    investment_capital_available_range = Column(String(100))
     marital_status = Column(String(100))
     number_of_dependant_accompanying = Column(Integer)
-    is_entrepreneur = Column(Boolean)
+    is_entrepreneur = Column(String(10))
     military_service_status = Column(String(100))
-    has_criminal_record = Column(Boolean)
-    language_ability = Column(ARRAY(String(100)))
-    preferred_industry_id = Column(Integer, ForeignKey('industry_type.id'))
+    has_criminal_record = Column(String(10))
+    language_ability = Column(JSON)
+    preferred_industry = Column(String(100))
     health_status = Column(String(1000))
 
-    work_industry = relationship(IndustryType, foreign_keys=[work_industry_id])
-    preferred_industry = relationship(IndustryType, foreign_keys=[preferred_industry_id])
     users = relationship(Users, foreign_keys=[users_id])
 
 class VisaProgram(db.Model):
@@ -151,4 +157,5 @@ class Country(db.Model):
     __tablename__ = "country"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
