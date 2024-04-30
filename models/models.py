@@ -149,8 +149,11 @@ class VisaProgram(db.Model):
     __tablename__ = "visa_program"
 
     id = Column(Integer, primary_key=True)
+    doc_id = Column(Integer)
+    country = Column(String(100))
     title = Column(String(200), nullable=False)
-    description = Column(String(3000))
+    photo = Column(String(100))
+    description = Column(db.Text)
     destination_id = Column(Integer, ForeignKey('destination.id'))
 
 class Country(db.Model):
@@ -159,3 +162,20 @@ class Country(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
+
+class ClientVisaPrograms(db.Model):
+    __tablename__ = "client_visa_programs"
+
+    id = Column(Integer, primary_key=True)
+    users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    visa_programs = Column(JSON)
+    is_latest = Column(Boolean, default=True)
+
+class ClientVisaTimeline(db.Model):
+    __tablename__ = "client_timeline"
+
+    id = Column(Integer, primary_key=True)
+    users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    doc_id = Column(Integer)
+    timeline = Column(JSON)
+    is_latest = Column(Boolean, default=True)

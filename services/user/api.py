@@ -156,7 +156,6 @@ def user_personal_info():
             if not user_profile:
                 raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
 
-            # Update the password
             user_profile.first_name = first_name.strip() if first_name else first_name
             user_profile.last_name = last_name.strip() if last_name else last_name
             user_profile.born_date = born_date

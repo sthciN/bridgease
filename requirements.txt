@@ -7,3 +7,4 @@ stripe==9.3.0
 flask_praetorian==1.6.0
 flask_Cors==4.0.0
 marshmallow-sqlalchemy==1.0.0
+openai==1.23.6

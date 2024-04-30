@@ -1,4 +1,15 @@
-from .models import IndustryType, ClimateType, Destination, LanguageType, Users, UserProfile, Client, VisaProgram, Country
+from .models import (
+    IndustryType,
+    ClimateType,
+    Destination,
+    LanguageType,
+    Users,
+    UserProfile,
+    Client,
+    VisaProgram,
+    Country,
+    ClientVisaPrograms
+)
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 from marshmallow import fields
 
@@ -166,10 +177,10 @@ class VisaProgramSchema(SQLAlchemySchema):
         include_relationships = True
         load_instance = True
     
-    id = auto_field()
+    doc_id = auto_field()
     title = auto_field()
+    country = auto_field()
     description = auto_field()
-    destination_id = auto_field()
 
 class CountrySchema(SQLAlchemySchema):
     class Meta:
@@ -179,3 +190,20 @@ class CountrySchema(SQLAlchemySchema):
 
     id = fields.Integer(attribute="id")
     title = fields.String(attribute="title")
+
+class ClientVisaProgramsSchema(SQLAlchemySchema):
+    class Meta:
+        model = ClientVisaPrograms
+        include_relationships = True
+        load_instance = True
+
+    visaPrograms = fields.String(attribute="visa_programs")
+
+class ClientVisaTimelineSchema(SQLAlchemySchema):
+    class Meta:
+        model = ClientVisaPrograms
+        include_relationships = True
+        load_instance = True
+
+    doc_id = fields.Integer(attribute="doc_id")
+    timeline = fields.String(attribute="timeline")

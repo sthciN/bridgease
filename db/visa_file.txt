@@ -11,3 +11,462 @@ doc_id: 4699082  \n visa title: Skilled worker  \n country: Germany  \n visa des
 doc_id: 4699083  \n visa title: Startup Visa  \n country: Canada  \n visa description: Eligibility:  \n Innovative business with potential for job creation and global competition.  \n Apply individually or in a group of up to 5 owners.  \n Requirements:  \n Qualifying Business:  \n Each applicant holds minimum 10% voting rights.  \n Applicants & designated organization hold over 50% voting rights combined.  \n Business incorporated and actively managed in Canada with core operations there.  \n Letter of Support from a Designated Organization:  \n Contact and convince a designated organization to support your business idea.  \n Obtain a letter of support and commitment certificate from them.  \n Language Requirements:  \n Minimum Canadian Language Benchmark 5 (English or French) in all areas (listening, reading, writing, speaking) from an approved agency.  \n Settlement Funds:  \n Demonstrate sufficient financial resources to support yourself and dependents upon arrival.  \n Amount varies based on family size (see table in text). You cannot borrow these funds.  \n Number of  \n family members        Funds required  \n (in Canadian dollars)  \n 1: $13,757  \n 2: $17,127  \n 3: $21,055  \n 4: $25,564  \n 5: $28,994  \n 6: $32,700  \n 7: $36,407  \n If more than 7 people, for each additional family member: $3,706
 ---
 doc_id: 4699084  \n visa title: Study Visa  \n country: Canada  \n visa description: Study Permit Required: Most foreign nationals need a study permit.  \n Provincial Attestation Letter Required: As of January 22, 2024, most students need a provincial attestation letter (PAL) from the planned province of study to apply for a study permit. Omitting this will likely result in a rejected application with fees returned.  \n Processing Time: 11 weeks (not including biometrics time).  \n Application Fee: CAD $150  \n Apply Before Traveling: Apply for your study permit before traveling to Canada.
+-- 
+doc_id: 4699085 \n visa title: family sponsorship \n country: Canada \n visa description: "who can :You can s+F3:G17ponsor your own parents and grandparents, related by blood or adoption.
+
+In case of divorce, you’ll need to submit separate applications if you sponsor divorced parents and grandparents. If your divorced parents or grandparents have a current spouse, common-law partner or a conjugal partner, these people become dependants on the application and can immigrate to Canada with your parents and grandparents, if approved.
+
+In the application, you can include your brothers and sisters, half-brothers and half-sisters, or step-brothers and step-sisters only if they qualify as dependent children.
+
+You must meet the income requirements for all the people you want to sponsor and their dependants (spouse, partner and dependent children).
+
+The people you sponsor must also be eligible
+To show they meet the eligibility requirements, your parents and grandparents and their dependants must provide
+
+all required forms and documents with their application
+any additional information we request during processing, including
+medical exams
+police certificates
+biometrics
+Examples of who you can sponsor
+See the examples below to better understand who you can sponsor.
+
+Sponsoring your mother and father, together as a couple
+Sponsoring your father, your stepmother and their son
+Sponsoring your grandparents, your mother and your stepfather
+Who you can’t sponsor
+You can’t sponsor
+
+your spouse’s parents and grandparents (your in-laws)
+however, you can be a co-signer on your in-laws’ application
+someone who is inadmissible to Canada (someone who is not allowed to come to Canada)If you’re eligible, you can sponsor your spouse, partner or dependent children to become permanent residents of Canada.
+
+If you do, you must be able to:
+
+support them financially
+make sure they don’t need social assistance from the government
+Who you can sponsor
+You can sponsor your spouse, common-law partner, conjugal partner or dependent children.
+
+Your spouse
+Your spouse can be either sex and must be:
+
+legally married to you
+at least 18 years old
+Your common-law partner
+Your common-law partner:
+
+isn’t legally married to you
+can be either sex
+is at least 18 years old
+has been living with you for at least 12 consecutive months, meaning you’ve been living together continuously for 1 year in a conjugal relationship, without any long periods apart
+Any time spent away from each other should have been
+short
+temporary
+If you or your common-law partner choose to end the relationship, we consider the relationship to be over.
+
+You’ll need to give proof of your common-law relationship.
+
+Your conjugal partner
+Your conjugal partner:
+
+isn’t legally married to you or in a common-law relationship with you
+can be either sex
+is at least 18 years old
+has been in a relationship with you for at least 1 year
+lives outside Canada
+can't live with you in their country of residence or marry you because of significant legal and immigration reasons such as
+their marital status (for example, they’re still married to someone else in a country where divorce isn’t possible)
+their sexual orientation (for example, you are in a same-sex relationship, and same-sex relationships are not accepted, or same-sex marriage is illegal where they live),
+persecution (for example, your relationship is between different religious groups which is not accepted and they may be punished legally or socially)
+You’ll need to give proof that you could not live together or get married in your conjugal partner’s country (for example, proof of refused long-term stays in each other’s country).
+
+Dependent children
+Children qualify as dependants if they meet both of these requirements:
+
+they’re under 22 years old
+they don’t have a spouse or common law partner
+Children 22 years old or older qualify as dependants if they meet both of these requirements:
+
+they are unable to financially support themselves because of a mental or physical condition
+they have depended on their parents for financial support since before the age of 22
+With the exception of age, your dependent child must continue to meet these requirements until we finish processing your application.
+
+Use our online tool to check if a child qualifies as a dependant.
+
+If they qualify as a dependent child, you can sponsor
+
+your own child
+If you’re a Canadian citizen, your child may also be a Canadian citizen, even if they weren’t born in Canada. You can’t sponsor your child for permanent residence if they’re Canadian citizens already. Check if your child is already a Canadian citizen.
+If you’re sponsoring just your child, without sponsoring your spouse or partner, you’ll name your child as the principal applicant in the application. You’ll have to show that the other parent or legal guardian agrees to your child immigrating to Canada. See your checklist for what you’ll need to provide.
+If the child you want to sponsor has a child of their own (your grandchild), you’ll include your grandchild as a dependant in the application.
+If you want to sponsor your adopted child or an orphaned family member, follow the instructions to sponsor your adopted child or orphaned family member instead.
+your spouse or partner and their child
+If you’re sponsoring your spouse or partner and a child (either their own child or a child you’ve had together), you’ll name your spouse or partner as the principal applicant and the child as the dependant in the application.
+If the child you want to sponsor has a child of their own, you’ll include the grandchild as a dependant in the application.
+Eligibility of the people you’re sponsoring
+To show they meet the eligibility requirements, your spouse, partner, dependent child and their dependent children (if applicable) must provide:
+
+all required forms and documents with their application
+any additional information we request during processing, including
+medical exams
+biometrics
+You can’t sponsor someone who is inadmissible to Canada. This means they’re not allowed to come to Canada.
+
+Read more about eligibility requirements in the instruction guide.Help for spouses or partners who are victims of abuse
+Exit this page quickly: 
+
+To exit this page quickly:
+If your abuser monitors your computer, delete your browsing history.
+
+You don’t have to stay in an abusive relationship to keep your status in Canada
+The person who’s abusing you might tell you that you’ll be deported or lose your children if you leave. If you’re a permanent resident, you have rights and freedoms in Canada.
+
+There used to be a condition on some sponsored spouses or partners of Canadian citizens and permanent residents. Under that condition, you had to live with your sponsor to keep permanent resident status. That condition no longer exists, and your status no longer depends on you living with your sponsor.
+
+If you have temporary status in Canada, you also have options.
+
+Get help if someone is threatening you
+Call 9-1-1 or your local police in an emergency.
+Call 1-888-242-2100 to contact our Client Support Centre for information on your citizenship or immigration status.
+Choose the option for victims of abuse and forced marriage to speak directly to an agent.
+They will tell you about your options. This includes a fee-exempt permit created for victims of family violence who need to escape their abusive spouse or partner.
+Call 2-1-1 to find community, social and health services.
+Find more services and information to deal with violence and abuse.
+If you are a woman escaping violence, find a women’s shelter.
+If you are a young person who needs support, you can talk to counsellors without giving your name at Kids Help Phone: 1-800-668-6868 or visit their website.
+You can also get this information in other languages:
+How to get help
+We have organizations that can offer you support or helpful information. Services are confidential.
+
+Find out how to get help if you are a victim of abuse or neglect.
+
+You might feel very alone in Canada.
+Your abuser might lie to you about your status in Canada.
+You might find it hard to talk to people.
+You might fear for your safety and the safety of your children.
+You might find it hard to communicate in English or French.
+You might be confused about your rights under Canadian law.
+Getting help is not shameful. You have the right to seek help.
+
+If you are facing family violence and are afraid of losing your immigration status in Canada by leaving your abusive spouse or partner, you have options:
+
+If you have valid temporary status in Canada, you may be able to:
+extend or renew your status
+If your temporary status is expired, you may be eligible to:
+restore your status
+apply for a special permit to stay in Canada temporarily
+Different programs are available to immigrate to Canada, such as applying for permanent residence under humanitarian and compassionate grounds
+What is abuse or neglect
+Abuse:
+Abuse is behaviour that scares, isolates, or controls another person. This may be actions or words. Abuse may be a pattern or a single incident.
+Neglect:
+Neglect is the failure to provide care, which can cause serious harm. This may be not providing food, clothing, medical care or shelter, or any other behaviour that could be hurtful.
+There are many types of abuse or neglect. As a victim, you may experience more than 1 type of abuse.
+
+The abuser could be your spouse, former spouse, partner or former partner, another family member or friend. The abuser could also be a member of your spouse’s or partner’s family. The abuser may be male or female.
+
+Find out more about types of family violence and how to recognize abuse.
+
+Types of abuse or neglect
+Physical abuse is contact that intimidates or hurts, for example
+
+hitting or pushing
+burning
+pinching
+slapping or punching
+kicking
+cutting or stabbing
+Sexual abuse is any sexual touching or action that is done against your will. This is a crime in Canada, even if you are in a relationship with your abuser. For example, when someone
+
+touches you or acts in a sexual way without your consent
+continues sexual activity when you have asked them to stop
+forces you to commit unsafe or humiliating sexual acts
+Emotional or psychological abuse might include
+
+insulting, humiliating or yelling
+harassing or threatening
+intimidating, name-calling or disrespecting
+criticizing or blaming
+breaking your things
+hurting or threatening to hurt family, friends or pets
+keeping you from seeing your family or friends
+threatening to take away or hurt your children
+Financial abuse is when someone limits your access to money to hurt you, for example
+
+taking your paycheck or money without permission
+withholding money, so that you can’t pay for things you or your children need, such as food, shelter or medical treatment
+Controlling behaviour that limits your freedom, such as
+
+withholding your passport, identification or other important documents
+keeping you in your home and not allowing you to leave
+constantly questioning and monitoring your Internet and phone use
+not allowing you to see your family and friends
+Neglect is when a family member who has a duty to care for you fails to provide you with your basic needs. This can involve
+
+not providing proper food or warm clothing
+not providing adequate health care or medication
+failing to prevent physical harm
+Forced marriage
+Forced marriage is when consent is not freely given by at least one of the parties to the marriage. Unlike arranged marriages which take place with the consent of both parties, in forced marriages, individuals are coerced to marry, usually by family members, through threats, physical violence, or emotional manipulation."
+---
+doc_id: 4699086 \n visa title: federal skilled trade program  \n country: Canada  \n visa description: "Eligibility to apply for the Federal Skilled Trades Program (Express Entry)
+The Federal Skilled Trades Program is for skilled workers who want to become permanent residents based on being qualified in a skilled trade.
+
+On this page:
+Minimum requirements
+Skilled trades work experience
+Job offer or certificate of qualification
+Language ability
+Education
+Proof of funds
+Admissibility
+Where you can live in Canada
+Next steps
+This is 1 of the 3 federal programs managed through Express Entry, our online application system for skilled workers.
+
+Choose another program.
+
+Minimum requirements
+To be eligible, you must meet all the minimum requirements for your
+
+skilled trades work experience
+job offer or certificate of qualification
+language ability
+Skilled trades work experience
+You must
+
+have at least 2 years of full-time work experience (or an equal amount of part-time work experience) in a skilled trade within the 5 years before you apply
+meet the job requirements for that skilled trade as set out in the National Occupational Classification (NOC)
+show that you performed the duties listed in the lead statement of the occupational description in the NOC, including
+all the essential duties
+most of the main duties
+Skilled trades NOC groups
+Your work experience must be in one of the following NOC groups:
+
+Major Group 72, technical trades and transportation officers and controllers
+excluding Sub-Major Group 726, transportation officers and controllers
+Major Group 73, general trades
+Major Group 82, supervisors in natural resources, agriculture and related production
+Major Group 83, occupations in natural resources and related production
+Major Group 92, processing, manufacturing and utilities supervisors, and utilities operators and controllers
+Major Group 93, central control and process operators and aircraft assembly assemblers and inspectors, excluding Sub-Major Group 932, aircraft assemblers and aircraft assembly inspectors
+Minor Group 6320, cooks, butchers and bakers
+Unit Group 62200, chefs
+Find the job’s NOC code, title and related training, education, experience and responsibilities category.
+
+We will refuse your application if
+
+you don’t show that your experience meets the description in the NOC
+you weren’t qualified to independently practise the trade occupation during this work
+Your work experience must be for paid work (paid wages or earned commission). We don’t count volunteer work or unpaid internships.
+
+Job offer or certificate of qualification
+You must have a
+
+valid job offer of full-time employment for a total period of at least 1 year or
+certificate of qualification in your skilled trade issued by a Canadian provincial, territorial or federal authority
+Certificate of qualification
+A certificate of qualification proves you’re qualified to work in a certain skilled trade in Canada. This means you
+
+passed a certification exam
+meet all the requirements to practise your trade in the province or territory that issued your certificate
+This certificate is issued by
+
+the provincial or territorial body that governs trades in their province or territory, or
+a federal authority
+Depending on which body or authority issues it, this certificate may be called a “certificate of qualification” or a “qualification certificate.”
+
+To get a certificate, the provincial, territorial or federal authority must assess your training, trade experience and skills to decide if you’re eligible to write a certification exam.
+
+Get assessed by the province or territory
+Each province and territory has its own
+
+certificate of qualification requirements
+certification process
+You may
+
+have to go to the province or territory to be assessed for your trade
+need an employer in Canada to give you experience and training
+To learn more about getting assessed, visit the website of the body that governs trades for the province or territory where you want to live and work:
+
+Alberta
+British Columbia
+Manitoba
+New Brunswick
+Newfoundland and Labrador
+Northwest Territories
+Nova Scotia
+Nunavut
+Ontario
+Prince Edward Island
+Saskatchewan
+Yukon
+If the province or territory where you plan to live and work doesn’t give certificates of qualification in your trade, you’ll need a valid job offer in your trade to be eligible for this program.
+
+If your trade is federally regulated
+If your trade is not regulated by a province or territory, it may be federally regulated (for example, airplane mechanics).
+
+Find out who regulates your trade and how to get assessed through the Canadian Information Centre for International Credentials.
+
+Language ability
+You must
+
+take approved language tests for
+writing
+reading
+listening
+speaking
+meet the minimum score required
+enter the test results in your Express Entry profile
+Your language tests
+
+are valid for 2 years after the date of the test result
+must be valid on the day you apply for permanent residence.
+Education
+There is no education requirement for the Federal Skilled Trades Program.
+
+If you want to improve your rank in the Express Entry pool, there are 2 ways you can do this.
+
+If you went to school in Canada, you can get points for a certificate, diploma or degree from a Canadian
+secondary institution (high school) or
+post-secondary institution
+If you have foreign education, you can get points if you have both of these
+a completed educational credential
+an educational credential assessment report for immigration purposes that
+is from a designated organization and
+shows your education is equal to a completed certificate, diploma or degree from a Canadian secondary institution (high school) or post-secondary institution
+Proof of funds
+You must show that you have enough money for you and your family to settle in Canada, unless you
+
+are currently able to legally work in Canada and
+have a valid job offer from an employer in Canada
+Admissibility
+You must be admissible to Canada.
+
+Where you can live in Canada
+You must plan to live outside the province of Quebec. The province of Quebec selects its own skilled workers. If you plan on living in Quebec, see Quebec-selected skilled workers for more information.
+
+When you fill out your profile, we’ll ask you where you plan to live in Canada. You don’t have to settle in that province or territory.
+
+If you’re a Provincial Nominee, you must settle in the province or territory that nominated you.Respond to your invitation to apply
+If we invite you to apply for permanent residence, you'll get a message in your account telling you:
+
+which program you've been invited to apply for
+what to do next
+You'll need to show proof of the information you gave us in your Express Entry profile. We’ll assess whether the information you submit in your application is different from what was in your profile.
+
+If we find that you gave us false information or left out important details, we could:
+
+refuse your application
+find you inadmissible
+bar you for 5 years from applying to come to Canada for any reason
+Apply for permanent residence.
+
+Program requirements
+You can check the criteria for the program you've been invited to apply under to make sure you're still eligible.
+
+By understanding your program requirements, you'll be more prepared to apply. It could also help you decide whether to accept an invitation to apply.
+
+Changes to your personal situation
+If your situation (or that of your spouse or common-law partner) changes, you should re-calculate your score before applying online for permanent residence.
+
+If your recalculated score is less than the lowest score in your round of invitations, you should decline the invitation. If you decide to apply anyway, we may:
+
+refuse your application
+not refund your application fee
+Some examples of changes that could lower your score:
+
+you no longer have a valid job offer
+you no longer have a provincial nomination
+your language test scores:
+have expired
+are lower after you were retested
+Declining an invitation to apply
+If you decline an invitation, you'll be put back into the Express Entry pool of candidates. You'll be considered in future rounds of invitations, if you’re still eligible.
+
+The cut-off score varies from round to round. If your score isn’t high enough, you might not be invited to apply again. In some cases, you may have to take steps to be invited to apply again. For example, you may need to:
+
+improve your score
+update your Express Entry profile
+There is no guarantee that you'll be invited to apply again. However, if you choose to re-enter the pool, declining an invitation won't affect whether or not you’re invited to apply later.
+
+If you don't decline an invitation and you don't apply within 60 days, the invitation will expire and your profile will be removed from the pool. To be considered in future rounds of invitations you'll have to:
+
+fill out and submit a new Express Entry profile
+meet the eligibility
+be accepted into the pool again"
+---
+doc_id: 4699087  \n visa title: economic mobility pathway pilot  \n country: Canada  \n "The Economic Mobility Pathways Pilot (EMPP) helps skilled refugees and other displaced people immigrate to Canada.
+
+We made some updates to make it easier to apply to immigrate to Canada through the EMPP.
+
+There are now 2 ways you can apply for the EMPP:
+
+through one of 3 selected economic programs
+Atlantic Immigration Program
+Provincial Nominee Program
+Rural and Northern Immigration Program (RNIP)
+This is referred to as the regional EMPP. You need to be eligible for one of the above programs and apply first to a province, territory or RNIP community (depending on which program you choose.)
+directly to us for just the EMPP
+This is referred to as the federal EMPP. It includes a Job Offer and No Job Offer stream. You need to meet the work experience, education and language requirements.
+Through the EMPP, we’ll
+
+waive application and biometric fees for you and your dependants
+review and process your application in 6 months or less (in most cases)
+cover the cost of medical exams through the Interim Federal Health Program
+let you access the Immigration Loans Program (ILP), if we approve your application, to help with
+travel costs
+some pre-arrival travel services from the International Organization for Migration
+the right of permanent residence fee
+let you access the EMPP-specific Canadian Orientation Abroad Programme to help you settle in Canada
+If you choose to apply for an economic immigration program through the regional EMPP, we’ll also
+
+make it easier for you to be eligible and apply for the program
+let you use a loan to meet financial requirements to support yourself and your family in Canada (your settlement funds)Before you arrive in Canada
+Before you arrive, we’ll give you access to the Canadian Orientation Abroad programme. This is a general orientation to life in Canada that will
+
+help you prepare for your move
+connect you to free settlement services after you arrive in Canada, such as language training
+After you arrive in Canada
+Help for new immigrants
+There are many services to help you or your family
+
+learn or improve English and French
+find a job (if you don’t have one already)
+find activities in your new community
+Find out what services are available in your area. You can also learn more about starting your life in Canada.
+
+Confirm your permanent resident status
+You’ll need to confirm your permanent resident (PR) status. In most cases, you can do this through our secure online Permanent Residence Portal.
+
+You don’t have to do anything until we send you an email from an address ending in cic.gc.ca. Do not create your own account.
+
+Once we contact you, follow the instructions to confirm your PR status online.
+
+You must tell us if you leave Canada before we grant you PR status.
+
+Make sure you keep your information up to date
+Use the web form if you need to update your contact information or tell us about changes to your family situation (for example, marriage, birth, divorce or death).
+
+Get your permanent resident card
+Once you become a permanent resident, we’ll make an electronic confirmation of permanent residence (e-COPR) available to you in the Permanent Residence Portal. This document is proof of your new status in Canada.
+
+In the portal, we’ll also ask you to provide a photo so we can start the process of issuing your first PR card. You don’t need to apply for your first PR card.
+
+While you wait for your PR card, you can use your signed e-COPR to
+
+prove you’re a permanent resident in Canada
+apply for government benefits and services
+Like your social insurance number so you can work.
+Find out about assistance loans
+Once you arrive in Canada, you may be able to get an assistance loan if you need one. To do so, send a message to IRCC.INEMPP-PVAMERI.IRCC@cic.gc.ca and include:
+
+Subject line: EMPP request for assistance loan
+Body of email:
+your application number (you can find this on correspondence from us)
+number of people in your application, including yourself
+your email address
+your phone number
+name of your employer in Canada (if this applies)"
+---
