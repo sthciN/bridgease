@@ -9,6 +9,8 @@ class IndustryType(db.Model):
     __tablename__ = "industry_type"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
@@ -16,6 +18,8 @@ class CurrencyType(db.Model):
     __tablename__ = "currency_type"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
@@ -23,6 +27,8 @@ class ClimateType(db.Model):
     __tablename__ = "climate_type"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
@@ -30,6 +36,8 @@ class Destination(db.Model):
     __tablename__ = "destination"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     name = Column(String(100), nullable=False)
     country = Column(String(100), nullable=False)
     state = Column(String(100))
@@ -65,6 +73,8 @@ class LanguageType(db.Model):
     __tablename__ = "language_type"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
@@ -72,6 +82,8 @@ class Users(db.Model):
     __tablename__ = "users"
     
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     email = Column(String, unique=True, nullable=False)
     hashed_password = db.Column(db.Text)
     roles = db.Column(db.Text)
@@ -103,12 +115,13 @@ class Users(db.Model):
     def is_valid(self):
         return self.is_active
 
-
 class UserProfile(db.Model):
     __tablename__ = "user_profile"
     
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     first_name = Column(String(100))
     last_name = Column(String(250))
     born_date = Column(Date)
@@ -118,12 +131,13 @@ class UserProfile(db.Model):
     
     users = relationship(Users, foreign_keys=[users_id])
 
-
 class Client(db.Model):
     __tablename__ = "client"
 
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     preferred_climate_type = Column(JSON)
     preferred_language = Column(JSON)
     current_country_of_residence = Column(String(100))
@@ -149,6 +163,8 @@ class VisaProgram(db.Model):
     __tablename__ = "visa_program"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     doc_id = Column(Integer)
     country = Column(String(100))
     title = Column(String(200), nullable=False)
@@ -160,6 +176,8 @@ class Country(db.Model):
     __tablename__ = "country"
 
     id = Column(Integer, primary_key=True)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     name = Column(String(100), nullable=False)
     title = Column(String(100), nullable=False)
 
@@ -168,7 +186,10 @@ class ClientVisaPrograms(db.Model):
 
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     visa_programs = Column(JSON)
+    visa_program_translate = Column(JSON)
     is_latest = Column(Boolean, default=True)
 
 class ClientVisaTimeline(db.Model):
@@ -176,6 +197,9 @@ class ClientVisaTimeline(db.Model):
 
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    created_at = Column(db.DateTime, default=db.func.now(tz='UTC'))
+    modified_at = Column(db.DateTime, default=db.func.now(tz='UTC'), onupdate=db.func.now(tz='UTC'))
     doc_id = Column(Integer)
     timeline = Column(JSON)
+    timeline_translate = Column(JSON)
     is_latest = Column(Boolean, default=True)
