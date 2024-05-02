@@ -7,7 +7,6 @@ from services.auth.guard_app import guard
 import flask_praetorian
 from utils.const import WEBSITE_LANGUAGES
 from flask_praetorian.exceptions import MissingUserError, InvalidUserError
-
 from utils.handler import NotFoundData, InvalidBodyRequest
 from utils.locale.http_message import get_http_message
 from models.schemas import UsersSchema, UserProfileSchema, ClientBasicInformationSchema, ClientFamilyInformationSchema, ClientBusinessInformationSchema, ClientPreferenceInformationSchema
@@ -115,7 +114,17 @@ def get_user_language():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/user/refresh-token", methods=["GET"])
+def refresh_token():
+    try:
+        old_token = guard.read_token_from_header()
+        new_token = guard.refresh_jwt_token(old_token)
+        
+        return jsonify({"access_token": new_token}), 200
 
+    except Exception as e:
+
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/user-profile', methods=['GET'])
