@@ -1,5 +1,5 @@
 from app import app
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from db.database import db
 from models.models import UserProfile, Users, ClientVisaPrograms, ClientVisaTimeline
 from .gpt import query_gpt
@@ -7,7 +7,8 @@ from .visa_card import query_assistant, create_json_assistant, create_timeline_a
 from .timeline import get_visa_timeline
 import flask_praetorian
 import json
-from models.schemas import ClientVisaProgramsSchema, ClientVisaTimelineSchema
+from utils.const import WEBSITE_LANGUAGES
+from models.schemas import ClientVisaProgramsSchema, ClientVisaProgramByIDSchema, ClientVisaProgramByIDTranslateSchema,ClientVisaTimelineSchema, ClientVisaTimelineTranslateSchema, ClientVisaProgramsTranslateSchema
 from utils.handler import NotFoundData, NotEnoughCredit
 from utils.locale.http_message import get_http_message
 from threading import Thread
@@ -61,7 +62,7 @@ def reprocess_visa_card():
 
 @app.route("/user/process-visa-card")
 @flask_praetorian.auth_required
-def provide_visacard_by_assistant():
+def process_visa_card():
     try:
         try:
             current_user = flask_praetorian.current_user()
@@ -69,10 +70,18 @@ def provide_visacard_by_assistant():
         except Exception as e:
             return jsonify(message='User not found or token is invalid'), 404
         
+        language = request.args.get('language')
+        language = language if language in WEBSITE_LANGUAGES[1:] else None
         user_id = current_user.id
+
         client_visa_program = ClientVisaPrograms.query.filter_by(users_id=user_id, is_latest=True).first()
         
         if client_visa_program:
+            if language:
+                print('HIIIII')
+                client_visa_program = ClientVisaProgramsTranslateSchema().dump(client_visa_program)
+                return jsonify(client_visa_program), 200
+
             client_visa_program = ClientVisaProgramsSchema().dump(client_visa_program)
             return jsonify(client_visa_program), 200
     
@@ -100,7 +109,7 @@ def provide_visacard_by_assistant():
 
 @app.route("/user/visa-card")
 @flask_praetorian.auth_required
-def visacard_by_assistant():
+def get_visacards():
     try:
         current_user = flask_praetorian.current_user()
     
@@ -113,13 +122,21 @@ def visacard_by_assistant():
     if not client_visa_program:
         return jsonify({"message": "Visa card not available yet."}), 202
     
-    client_visa_program = ClientVisaProgramsSchema().dump(client_visa_program)
+    language = request.args.get('language')
+    language = language if language in WEBSITE_LANGUAGES[1:] else None
+    
+    if language:
+        print('HIIIII@@')
+        client_visa_program = ClientVisaProgramsTranslateSchema().dump(client_visa_program)
+    
+    else:
+        client_visa_program = ClientVisaProgramsSchema().dump(client_visa_program)
     
     return jsonify(client_visa_program), 200
 
 @app.route("/user/process-timeline/<string:id>")
 @flask_praetorian.auth_required
-def provide_visa_timeline(id):
+def process_timeline(id):
     try:
         try:
             id = int(id)
@@ -135,7 +152,14 @@ def provide_visa_timeline(id):
         user_id = current_user.id
         client_visa_timeline = ClientVisaTimeline.query.filter_by(users_id=user_id, doc_id=id, is_latest=True).first()
         
+        language = request.args.get('language')
+        language = language if language in WEBSITE_LANGUAGES[1:] else None
+
         if client_visa_timeline:
+            if language:
+                client_visa_timeline = ClientVisaTimelineTranslateSchema().dump(client_visa_timeline)
+                return jsonify(client_visa_timeline), 200
+            
             client_visa_timeline = ClientVisaTimelineSchema().dump(client_visa_timeline)
             return jsonify(client_visa_timeline), 200
         
@@ -161,35 +185,9 @@ def provide_visa_timeline(id):
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
-@app.route("/user/fetch-timeline/<string:id>")
-@flask_praetorian.auth_required
-def poll_timeline_by_assistant(id):
-    try:
-        id = int(id)
-    except ValueError:
-        return jsonify({'error': 'Invalid ID'}), 400
-
-    try:
-        current_user = flask_praetorian.current_user()
-    
-    except Exception as e:
-        return jsonify(message='User not found or token is invalid'), 404
-    
-    user_id = current_user.id
-    
-    client_visa_timeline = ClientVisaTimeline.query.filter_by(users_id=user_id, doc_id=id, is_latest=True).first()
-    
-    if not client_visa_timeline:
-        return jsonify({"message": "Visa card not available yet."}), 202
-    
-    client_visa_timeline = ClientVisaTimelineSchema().dump(client_visa_timeline)
-    
-    return jsonify(client_visa_timeline), 200
-
-
 @app.route("/user/timeline/<string:id>")
 @flask_praetorian.auth_required
-def timeline_by_assistant(id):
+def get_timeline(id):
     try:
         id = int(id)
     except ValueError:
@@ -206,15 +204,22 @@ def timeline_by_assistant(id):
     client_visa_timeline = ClientVisaTimeline.query.filter_by(users_id=user_id, doc_id=id, is_latest=True).first()
     
     if not client_visa_timeline:
-        return jsonify({"timeline": "[]"}), 200
+        return jsonify({"timeline": []}), 202
     
-    client_visa_timeline = ClientVisaTimelineSchema().dump(client_visa_timeline)
+    language = request.args.get('language')
+    language = language if language in WEBSITE_LANGUAGES[1:] else None
+    
+    if language:
+        client_visa_timeline = ClientVisaTimelineTranslateSchema().dump(client_visa_timeline)
+    
+    else:
+        client_visa_timeline = ClientVisaTimelineSchema().dump(client_visa_timeline)
     
     return jsonify(client_visa_timeline), 200
 
 @app.route("/user/visa-program/<string:id>")
 @flask_praetorian.auth_required
-def client_visa_program(id):
+def get_visacard_by_id(id):
     try:
         try:
             id = int(id)
@@ -230,14 +235,23 @@ def client_visa_program(id):
         
         user_id = current_user.id
         
-        client_visa_program = ClientVisaPrograms.query.filter_by(users_id=user_id, is_latest=True).first()
+        client_visa_programs = ClientVisaPrograms.query.filter_by(users_id=user_id, is_latest=True).first()
         
-        if not client_visa_program:
+        if not client_visa_programs:
             return jsonify({"visaProgram": ""}), 200
         
-        # find the visa program by id
-        client_visa_programs = json.loads(client_visa_program.visa_programs)
-        client_visa_program = [visa for visa in client_visa_programs if visa['doc_id'] == id]
+        language = request.args.get('language')
+        language = language if language in WEBSITE_LANGUAGES[1:] else None
+
+        print('language', language)
+        
+        if language:
+            client_visa_program = ClientVisaProgramByIDTranslateSchema(doc_id=id).dump(client_visa_programs)
+
+        else:
+            client_visa_program = ClientVisaProgramByIDSchema(doc_id=id).dump(client_visa_programs)
+        
+        print('client_visa_programs', type(client_visa_program), client_visa_program)
         
         return jsonify(client_visa_program), 200
     

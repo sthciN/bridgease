@@ -9,6 +9,7 @@ from .assistant import prepare_assistant
 
 def query_assistant(user_id, app):
     # time.sleep(10)
+    
     client = OpenAI()
     user_info = get_user_info(user_id, app)
     
@@ -32,32 +33,44 @@ def query_assistant(user_id, app):
     
     except Exception as e:
         print('error', e)
-        assis_id = 'asst_0BryikZoFEph8dr3EsiZMRCd'
+        assis_id = 'asst_vjyXRZTqnlFqG3DrbHt4RabK'
         json_result = prepare_assistant(client, assis_id, result)
+        json_result = json.loads(json_result)
 
         print('json_result', type(json_result), json_result)
 
     print('END????', json_result)
-    # result = [
-    #     {
-    #         "doc_id": 4699800,
-    #         "title": "Canada Student Visa CSV",
-    #         "country": "Canada",
-    #         "short_summary": "This Canadian visa targets students with financial stability. Suitable for those with clean criminal records and without entrepreneurial interests, like the user."
-    #     },
-    #     {
-    #         "doc_id": 4699801,
-    #         "title": "Family Sponsorship",
-    #         "country": "Canada",
-    #         "short_summary": "For Iraqi citizens looking to bring family, fulfilling financial support conditions could match the user's marital and dependant status."
-    #     }
-    # ]
+
+    with app.app_context():
+        user_profile = UserProfile.query.filter_by(users_id=user_id).first()
+
+    # Translate the texts
+    try:
+        user_language = user_profile.language
+        if user_language == 'en':
+            raise Exception('No need to translate')
+        
+        assis_id = 'asst_5uBqYwJfUa09gMq6FEpUkFl6'
+
+        print('user_language', user_language)
+        result_translated = prepare_assistant(client, assis_id, f'Language: {user_language}. ' + str(json_result))
+        json_result_translated = json.loads(result_translated)
+
+        print('json_result_translated', json_result_translated)
+
+    except Exception as e:
+        print('>>>The translation error', e)
+        json_result_translated = []
     
     with app.app_context():
-        client_visa_program = ClientVisaPrograms(users_id=user_id, visa_programs=json.dumps(json_result), is_latest=True)
+        client_visa_program = ClientVisaPrograms(
+            users_id=user_id,
+            visa_programs=json.dumps(json_result),
+            visa_program_translate=json.dumps(json_result_translated),
+            is_latest=True
+            )
         db.session.add(client_visa_program)
         db.session.commit()
-        user_profile = UserProfile.query.filter_by(users_id=user_id).first()
         user_profile.credits -= 1
         db.session.commit()
 

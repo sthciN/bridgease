@@ -8,10 +8,12 @@ from .models import (
     Client,
     VisaProgram,
     Country,
-    ClientVisaPrograms
+    ClientVisaPrograms,
+    ClientVisaTimeline
 )
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
-from marshmallow import fields
+from marshmallow import fields, Schema, post_load
+import json
 
 class IndustryTypeSchema(SQLAlchemySchema):
     class Meta:
@@ -197,13 +199,92 @@ class ClientVisaProgramsSchema(SQLAlchemySchema):
         include_relationships = True
         load_instance = True
 
-    visaPrograms = fields.String(attribute="visa_programs")
+    visaPrograms = fields.Method("get_visa_programs")
 
-class ClientVisaTimelineSchema(SQLAlchemySchema):
+    def get_visa_programs(self, obj):
+        return json.loads(obj.visa_programs or '[]')
+
+class ProgramSchema(Schema):
+    doc_id = fields.Integer()
+    title = fields.String()
+    country = fields.String()
+    short_summary = fields.String()
+
+class ClientVisaProgramsTranslateSchema(SQLAlchemySchema):
     class Meta:
         model = ClientVisaPrograms
         include_relationships = True
         load_instance = True
 
+    visaPrograms = fields.Method("get_translations")
+    
+    def get_translations(self, obj):
+        visa_program_translate = json.loads(obj.visa_program_translate or '{}')
+        translations = visa_program_translate.get('translations', [])
+
+        return ProgramSchema(many=True).load(translations)
+
+class ClientVisaProgramByIDSchema(SQLAlchemySchema):
+    class Meta:
+        model = ClientVisaPrograms
+        include_relationships = True
+        load_instance = True
+    
+    def __init__(self, doc_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.doc_id = doc_id
+
+    visaProgram = fields.Method("filter_program_by_id")
+
+    def filter_program_by_id(self, obj):
+        data = json.loads(obj.visa_programs or '[]')
+        return next((item for item in data if item['doc_id'] == self.doc_id), [])
+
+class ClientVisaProgramByIDTranslateSchema(SQLAlchemySchema):
+    class Meta:
+        model = ClientVisaPrograms
+        include_relationships = True
+        load_instance = True
+    
+    def __init__(self, doc_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.doc_id = doc_id
+
+    visaProgram = fields.Method("filter_program_by_id")
+
+    def filter_program_by_id(self, obj):
+        data = json.loads(obj.visa_program_translate or '[]')
+        data = data.get('translations', [])
+        return next((item for item in data if item['doc_id'] == self.doc_id), [])
+
+class TimelineSchema(Schema):
+    date = fields.String()
+    action = fields.String()
+
+class ClientVisaTimelineSchema(SQLAlchemySchema):
+    class Meta:
+        model = ClientVisaTimeline
+        include_relationships = True
+        load_instance = True
+
     doc_id = fields.Integer(attribute="doc_id")
-    timeline = fields.String(attribute="timeline")
+    timeline = fields.Method("get_timeline")
+
+    def get_timeline(self, obj):
+        return json.loads(obj.timeline or '[]')
+
+
+class ClientVisaTimelineTranslateSchema(SQLAlchemySchema):
+    class Meta:
+        model = ClientVisaTimeline
+        include_relationships = True
+        load_instance = True
+
+    doc_id = fields.Integer(attribute="doc_id")
+    timeline = fields.Method("get_translations")
+    
+    def get_translations(self, obj):
+        timeline_translate = json.loads(obj.timeline_translate or '{}')
+        translations = timeline_translate.get('translations', [])
+
+        return TimelineSchema(many=True).load(translations)
