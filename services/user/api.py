@@ -5,6 +5,7 @@ from models.models import Users, Client, UserProfile, Country, IndustryType
 from flask import request, jsonify, Blueprint
 from services.auth.guard_app import guard
 import flask_praetorian
+from utils.const import WEBSITE_LANGUAGES
 from flask_praetorian.exceptions import MissingUserError, InvalidUserError
 
 from utils.handler import NotFoundData, InvalidBodyRequest
@@ -23,12 +24,20 @@ def register():
          -d '{"email":"Walter","password":"calmerthanyouare"}'
     """
     try:
-        email = request.json.get("email").strip()
-        password = request.json.get("password")
-        language = request.json.get("language")
-        if not email or not password:
+        data = request.json.get("data")
+        try:
+            email = data["email"].strip()
+            password = data["password"]
+            first_name = data["firstName"] or None
+            last_name = data["lastName"] or None
+            language = data["language"] or None
+
+            if language and language not in WEBSITE_LANGUAGES:
+                raise InvalidBodyRequest(get_http_message(language=language, http_type='invalid_body_request'))
+
+        except Exception as e:
             raise InvalidBodyRequest(get_http_message(language=language, http_type='invalid_body_request'))
-        
+
         existing_user = Users.query.filter_by(email=email).first()
         if existing_user:
             raise ValueError(get_http_message(language=language, http_type='user_already_exists'))
@@ -37,14 +46,10 @@ def register():
         db.session.add(user)
         db.session.commit()
         user_id = db.session.query(Users).filter_by(email=email).first().id
-        print('IS there an id', user.id)
-        print('NOW user_id', user_id)
-        user_profile = UserProfile(users_id=user_id)
+        user_profile = UserProfile(users_id=user_id, first_name=first_name, last_name=last_name, language=language)
         db.session.add(user_profile)
         db.session.commit()
         ret = {"access_token": guard.encode_jwt_token(user)}
-        
-        print('ret', ret)
         
         return jsonify(ret), 200
 
@@ -87,6 +92,31 @@ def login():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/user/language")
+@flask_praetorian.auth_required
+def get_user_language():
+    try:
+        user_id = flask_praetorian.current_user().id
+        user = UserProfile.query.filter_by(users_id=user_id).first()
+        if not user:
+            raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
+        
+        language = user.language
+        
+        return jsonify({"language": language}), 200
+
+    except NotFoundData as e:
+        return jsonify({"error": str(e)}), 404
+
+    except InvalidBodyRequest as e:
+        return jsonify({"error": str(e)}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
 
 @app.route('/user-profile', methods=['GET'])
 @flask_praetorian.auth_required
@@ -98,8 +128,6 @@ def get_user_profile_by_access_token():
             raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
 
         user = UsersSchema().dump(user)
-        
-        print('user', user)
         
         return jsonify(user), 200
 
@@ -131,10 +159,7 @@ def user_personal_info():
             user_profile = UserProfileSchema().dump(user_profile)
             user_profile['email'] = email
             
-            print('user_profile', user_profile)
-            
             return jsonify(user_profile), 200
-        
         
         except NotFoundData as e:
             return jsonify({"error": str(e)}), 404
@@ -152,7 +177,7 @@ def user_personal_info():
 
             # Find the user
             user_profile = UserProfile.query.filter_by(users_id=user_id).first()
-            print('user_profile', user_profile)
+            
             if not user_profile:
                 raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
 
@@ -233,7 +258,6 @@ def client_basic_information():
             if not user_id:
                 raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
             
-            print('json', request.json)
             current_country_of_residence = request.json.get('countryOfResidence')
             citizenship_country = request.json.get('countryOfCitizenship')
             education_type = request.json.get('fieldOfStudy')
@@ -265,7 +289,6 @@ def client_basic_information():
 
                 try:
                     years_of_work_experience = int(years_of_work_experience)
-                    print('years_of_work_experience', years_of_work_experience)
                 except Exception as e:
                     raise InvalidBodyRequest(get_http_message(language='en', http_type='invalid_body_request'))
             
@@ -329,7 +352,6 @@ def client_family_information():
             if not user_id:
                 raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
             
-            print('json', request.json)
             marital_status = request.json.get('maritalStatus')
             number_of_dependant_accompanying = request.json.get('noOfDependentAccompanyingYou')
             military_service_status = request.json.get('militaryServiceStatus')
@@ -356,7 +378,6 @@ def client_family_information():
 
                 try:
                     number_of_dependant_accompanying = int(number_of_dependant_accompanying)
-                    print('number_of_dependant_accompanying', number_of_dependant_accompanying)
                 except Exception as e:
                     raise InvalidBodyRequest(get_http_message(language='en', http_type='invalid_body_request'))
             
@@ -416,7 +437,6 @@ def client_business_information():
             if not user_id:
                 raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
             
-            print('json', request.json)
             investment_capital_available_range = request.json.get('investmentCapitalAvailableRange')
             is_entrepreneur = request.json.get('isEntrepreneuer')
 
@@ -483,7 +503,6 @@ def client_preference_information():
             if not user_id:
                 raise NotFoundData(get_http_message(language='en', http_type='user_not_found'))
             
-            print('json', request.json)
             preferred_climate_type = request.json.get('preferredClimate')
             preferred_language = request.json.get('preferredLanguage')
             preferred_living_cost_range = request.json.get('preferredLivingCostRange')

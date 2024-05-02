@@ -45,7 +45,7 @@ def get_visa_timeline(user_id, id, app):
     print('END????', json_result)
 
     with app.app_context():
-        client_timeline = ClientVisaTimeline(users_id=user_id, timeline=json.dumps(json_result), is_latest=True)
+        client_timeline = ClientVisaTimeline(users_id=user_id, doc_id=id, timeline=json.dumps(json_result), is_latest=True)
         db.session.add(client_timeline)
         db.session.commit()
         user_profile = UserProfile.query.filter_by(users_id=user_id).first()
