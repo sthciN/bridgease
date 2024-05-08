@@ -27,60 +27,61 @@ def get_user_info(id, app):
         country = result[2]
         industry = result[3]
 
-        if user_profile.born_date is not None:
+        if user_profile.born_date:
             today = date.today()
             age = today.year - user_profile.born_date.year - ((today.month, today.day) < (user_profile.born_date.month, user_profile.born_date.day))
             data['age'] = age
         
-        if country.title is not None:
-            data['citizenship'] = country.title
+        if country.title:
+            data['citizenship_country'] = country.title
+            data['residence_country'] = country.title
 
-        if client.marital_status is not None:
+        if client.marital_status:
             data['marital_status'] = client.marital_status
 
-        if client.number_of_dependant_accompanying is not None:
+        if client.number_of_dependant_accompanying:
             data['number_of_dependant_accompanying'] = client.number_of_dependant_accompanying
 
-        if client.is_entrepreneur is not None:
+        if client.is_entrepreneur:
             data['is_entrepreneur'] = client.is_entrepreneur
 
-        if client.military_service_status is not None:
+        if client.military_service_status:
             data['military_service_status'] = client.military_service_status
 
-        if client.has_criminal_record is not None:
+        if client.has_criminal_record:
             data['has_criminal_record'] = client.has_criminal_record
         
-        if client.education_type is not None:
+        if client.education_type:
             data['education_in_home_country'] = client.education_type
         
-        if client.education_level is not None:
+        if client.education_level:
             data['education_level_in_home_country'] = client.education_level
         
-        if client.preferred_living_cost_range is not None:
+        if client.preferred_living_cost_range:
             data['preferred_living_cost_range'] = client.preferred_living_cost_range
         
-        if client.investment_capital_available_range is not None:
+        if client.investment_capital_available_range:
             data['investment_capital_available_range'] = client.investment_capital_available_range
         
-        if client.years_of_work_experience is not None:
+        if client.years_of_work_experience:
             data['years_of_work_experience_in_home_country'] = client.years_of_work_experience
         
-        if client.preferred_climate_type is not None:
+        if client.preferred_climate_type:
             data['preferred_climate'] = client.preferred_climate_type
         
-        if industry.title is not None:
+        if industry.title:
             data['working_industry_in_home_country'] = industry.title
         
-        # if client.preferred_industry_alias is not None:
+        # if client.preferred_industry_alias:
         #     data['preferred_industry'] = client.preferred_industry_alias
         
-        if client.language_ability is not None:
+        if client.language_ability:
             data['language_ability'] = client.language_ability
 
-        if client.preferred_language is not None:
+        if client.preferred_language:
             data['preferred_language'] = client.preferred_language
 
-        if client.health_status is not None:
+        if client.health_status:
             data['health_status'] = client.health_status
 
         return data
