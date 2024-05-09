@@ -8,15 +8,12 @@ from .assistant import prepare_assistant
 
 
 def query_assistant(user_id, app):
-    # time.sleep(10)
-    
     client = OpenAI()
     user_info = get_user_info(user_id, app)
     
     print('user_info', user_info)
-    message = f"My_Information: {user_info}"
-
-    assis_id = 'asst_BbFnJZ69Rqp5vA49YCt5Kmnk'
+    message = f"My_Information: {user_info}."
+    assis_id = 'asst_Ct5CebSng5qhWvkW5s9V0Mev'
 
     result = prepare_assistant(client, assis_id, message)
 
@@ -24,9 +21,7 @@ def query_assistant(user_id, app):
     
     try:
         json_result = json.loads(result)
-        print('::::::::::::FIRST OF ALL json_result', type(json_result), json_result)
         if len(json_result) == 0:
-            print('no result??')
             # Try again
             result = prepare_assistant(client, assis_id, message)
             json_result = json.loads(result)
@@ -36,9 +31,8 @@ def query_assistant(user_id, app):
         assis_id = 'asst_vjyXRZTqnlFqG3DrbHt4RabK'
         json_result = prepare_assistant(client, assis_id, result)
         json_result = json.loads(json_result)
-
-        print('json_result', type(json_result), json_result)
-
+    
+    json_result = json_result['data']
     print('END????', json_result)
 
     with app.app_context():
