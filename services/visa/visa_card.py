@@ -158,7 +158,6 @@ def create_timeline_assistant():
 
     return None
 
-
 def create_timeline_json_assistant():
     client = OpenAI()
 

@@ -205,7 +205,7 @@ class ClientVisaProgramsSchema(SQLAlchemySchema):
         return json.loads(obj.visa_programs or '[]')
 
 class ProgramSchema(Schema):
-    doc_id = fields.Integer()
+    visa_program_id = fields.Integer()
     title = fields.String()
     country = fields.String()
     short_summary = fields.String()
@@ -238,7 +238,7 @@ class ClientVisaProgramByIDSchema(SQLAlchemySchema):
 
     def filter_program_by_id(self, obj):
         data = json.loads(obj.visa_programs or '[]')
-        return next((item for item in data if item['doc_id'] == self.doc_id), [])
+        return next((item for item in data if item['visa_program_id'] == self.doc_id), [])
 
 class ClientVisaProgramByIDTranslateSchema(SQLAlchemySchema):
     class Meta:
@@ -255,7 +255,7 @@ class ClientVisaProgramByIDTranslateSchema(SQLAlchemySchema):
     def filter_program_by_id(self, obj):
         data = json.loads(obj.visa_program_translate or '[]')
         data = data.get('translations', [])
-        return next((item for item in data if item['doc_id'] == self.doc_id), [])
+        return next((item for item in data if item['visa_program_id'] == self.doc_id), [])
 
 class TimelineSchema(Schema):
     date = fields.String()
