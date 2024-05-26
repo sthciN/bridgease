@@ -13,7 +13,7 @@ def query_assistant(user_id, app):
     
     print('user_info', user_info)
     message = f"My_Information: {user_info}."
-    assis_id = 'asst_Ct5CebSng5qhWvkW5s9V0Mev'
+    assis_id = 'asst_4eCXf4UfzJtfPlhZBwRPcN2a'
 
     result = prepare_assistant(client, assis_id, message)
 
@@ -21,7 +21,8 @@ def query_assistant(user_id, app):
     
     try:
         json_result = json.loads(result)
-        if len(json_result) == 0:
+        data = json_result['data']
+        if len(data) == 0:
             # Try again
             result = prepare_assistant(client, assis_id, message)
             json_result = json.loads(result)
