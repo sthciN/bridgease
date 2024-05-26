@@ -170,6 +170,7 @@ class VisaProgram(db.Model):
     title = Column(String(200), nullable=False)
     photo = Column(String(100))
     description = Column(db.Text)
+    url = Column(String(200))
     destination_id = Column(Integer, ForeignKey('destination.id'))
 
 class Country(db.Model):
