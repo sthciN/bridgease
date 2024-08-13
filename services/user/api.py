@@ -10,10 +10,11 @@ from flask_praetorian.exceptions import MissingUserError, InvalidUserError
 from utils.handler import NotFoundData, InvalidBodyRequest
 from utils.locale.http_message import get_http_message
 from models.schemas import UsersSchema, UserProfileSchema, ClientBasicInformationSchema, ClientFamilyInformationSchema, ClientBusinessInformationSchema, ClientPreferenceInformationSchema
+from utils.routes import route
 
 user_blueprint = Blueprint('user_blueprint', __name__)
 
-@app.route("/register", methods=["POST"])
+@app.route(route["user"]["auth"]["register"], methods=["POST"])
 def register():
     """
     Registers a new user by parsing a POST request containing user credentials
@@ -62,7 +63,7 @@ def register():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/login", methods=["POST"])
+@app.route(route["user"]["auth"]["login"], methods=["POST"])
 def login():
     """
     Logs a user in by parsing a POST request containing user credentials and
