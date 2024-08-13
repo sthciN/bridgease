@@ -2,16 +2,21 @@ from app import app
 from flask import Blueprint, jsonify, request
 from db.database import db
 from models.models import UserProfile, Users, ClientVisaPrograms, ClientVisaTimeline
-from .gpt import query_gpt
-from .visa_card import query_assistant, create_json_assistant, create_timeline_assistant, create_timeline_json_assistant
+from .visa_card import query_assistant
 from .timeline import get_visa_timeline
 import flask_praetorian
-import json
 from utils.const import WEBSITE_LANGUAGES
-from models.schemas import ClientVisaProgramsSchema, ClientVisaProgramByIDSchema, ClientVisaProgramByIDTranslateSchema,ClientVisaTimelineSchema, ClientVisaTimelineTranslateSchema, ClientVisaProgramsTranslateSchema
+from models.schemas import (ClientVisaProgramsSchema, 
+            ClientVisaProgramByIDSchema, 
+            ClientVisaProgramByIDTranslateSchema,
+            ClientVisaTimelineSchema, 
+            ClientVisaTimelineTranslateSchema, 
+            ClientVisaProgramsTranslateSchema
+            )
 from utils.handler import NotFoundData, NotEnoughCredit
 from utils.locale.http_message import get_http_message
 from threading import Thread
+
 
 visa_blueprint = Blueprint('visa_blueprint', __name__)
 
@@ -78,7 +83,6 @@ def process_visa_card():
         
         if client_visa_program:
             if language:
-                print('HIIIII')
                 client_visa_program = ClientVisaProgramsTranslateSchema().dump(client_visa_program)
                 return jsonify(client_visa_program), 200
 
@@ -92,6 +96,7 @@ def process_visa_card():
     
         # user_id = 33
 
+        # TODO Task queue instead of thread
         thread = Thread(target=query_assistant, args=(user_id, app))
         thread.start()
 
@@ -126,7 +131,6 @@ def get_visacards():
     language = language if language in WEBSITE_LANGUAGES[1:] else None
     
     if language:
-        print('HIIIII@@')
         client_visa_program = ClientVisaProgramsTranslateSchema().dump(client_visa_program)
     
     else:
@@ -243,16 +247,12 @@ def get_visacard_by_id(id):
         language = request.args.get('language')
         language = language if language in WEBSITE_LANGUAGES[1:] else None
 
-        print('language', language)
-        
         if language:
             client_visa_program = ClientVisaProgramByIDTranslateSchema(doc_id=id).dump(client_visa_programs)
 
         else:
             client_visa_program = ClientVisaProgramByIDSchema(doc_id=id).dump(client_visa_programs)
-        
-        print('client_visa_programs', type(client_visa_program), client_visa_program)
-        
+                
         return jsonify(client_visa_program), 200
     
     except NotFoundData as e:

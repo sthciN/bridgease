@@ -14,14 +14,12 @@ misc_blueprint = Blueprint('misc_blueprint', __name__)
 def get_countries():
     try:
         countries = Country.query.all()
-        print('countries', countries)
         
         if not countries:
             raise NotFoundData(get_http_message(language='en', http_type='country_not_found'))
         
         countries = CountrySchema().dump(countries, many=True)
         
-        print('countries', countries)
         return jsonify(countries), 200
 
     except NotFoundData as e:

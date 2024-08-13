@@ -11,14 +11,12 @@ def query_assistant(user_id, app):
     client = OpenAI()
     user_info = get_user_info(user_id, app)
     
-    print('user_info', user_info)
     message = f"My_Information: {user_info}."
     assis_id = 'asst_4eCXf4UfzJtfPlhZBwRPcN2a'
 
     result = prepare_assistant(client, assis_id, message)
 
-    print('<<>>', result)
-    
+    # TODO Profiling
     try:
         json_result = json.loads(result)
         data = json_result['data']
@@ -34,7 +32,6 @@ def query_assistant(user_id, app):
         json_result = json.loads(json_result)
     
     json_result = json_result['data']
-    print('END????', json_result)
 
     with app.app_context():
         user_profile = UserProfile.query.filter_by(users_id=user_id).first()
@@ -47,14 +44,11 @@ def query_assistant(user_id, app):
         
         assis_id = 'asst_5uBqYwJfUa09gMq6FEpUkFl6'
 
-        print('user_language', user_language)
         result_translated = prepare_assistant(client, assis_id, f'Language: {user_language}. ' + str(json_result))
         json_result_translated = json.loads(result_translated)
 
-        print('json_result_translated', json_result_translated)
-
     except Exception as e:
-        print('>>>The translation error', e)
+        print('translation error', e)
         json_result_translated = []
     
     with app.app_context():

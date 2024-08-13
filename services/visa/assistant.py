@@ -32,7 +32,6 @@ def wait_for_run_completion(client, thread_id, run_id, sleep_interval=3):
         time.sleep(sleep_interval)
 
 def prepare_assistant(client, assis_id, message):
-    print('>>>assis_id', assis_id)
     thread = client.beta.threads.create()
     thread_id = thread.id
 
@@ -53,6 +52,5 @@ def prepare_assistant(client, assis_id, message):
         run_id=run.id,
         )
     print(f"Run Steps --> {run_steps.data[0]}")
-    print('='*10)
 
     return result
